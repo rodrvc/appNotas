@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const methodOverRide = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const Event = require('events');
 //inicilizaciones
 const app = express(); 
 require('./database');
@@ -46,6 +47,7 @@ app.use((req, res , next)=>{
 app.use(require('./router/index'));
 app.use(require('./router/users'));
 app.use(require('./router/notes'));
+app.use(require('./router/pruebas'));
 
 
 
@@ -57,5 +59,17 @@ app.use(express.static(path.join(__dirname, 'public'))); // define los archivos 
 app.listen(app.get('port'),()=>{
     console.log('puerto inicializado', app.get('port'));
 });
+
+const emiter = new Event();
+
+emiter.on('error', (ar) =>{
+    if(ar){
+    console.log('te equivocaste' , ar)
+    }else{
+        console.error('no tiene errores')
+    }
+})
+
+emiter.emit('error', {id : 1 , nombre: 'rodrigo'});
 
 
