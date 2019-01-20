@@ -1,7 +1,5 @@
 
-.move-me {
-    transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
-  }
+
 body{
     background: rgb(40, 40, 40);
 }

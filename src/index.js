@@ -57,3 +57,5 @@ app.use(express.static(path.join(__dirname, 'public'))); // define los archivos 
 app.listen(app.get('port'),()=>{
     console.log('puerto inicializado', app.get('port'));
 });
+
+
