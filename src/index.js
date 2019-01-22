@@ -18,7 +18,8 @@ app.engine('.hbs' , exphbs({// se configura el sistema de vistas
     defaultLayout: 'main',
     layoutsDir : path.join(app.get('views'), 'layouts'),
     partialsDir :path.join(app.get('views') , 'partials'), 
-    extname: '.hbs'   
+    extname: '.hbs',
+       
 })); 
 
 app.set('view engine' , 'hbs'); //se define el engine de vistas utilizado *(lineas anteriores)
