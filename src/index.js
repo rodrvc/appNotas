@@ -60,6 +60,9 @@ app.listen(app.get('port'),()=>{
     console.log('puerto inicializado', app.get('port'));
 });
 
+
+
+///PRUEBA CON EVENTOS 
 const emiter = new Event();
 
 emiter.on('error', (ar) =>{
