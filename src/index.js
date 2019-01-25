@@ -5,9 +5,11 @@ const methodOverRide = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const Event = require('events');
+const passport = require('passport');
 //inicilizaciones
 const app = express(); 
 require('./database');
+require('./config/passport');
 
 //setting
 
@@ -18,8 +20,7 @@ app.engine('.hbs' , exphbs({// se configura el sistema de vistas
     defaultLayout: 'main',
     layoutsDir : path.join(app.get('views'), 'layouts'),
     partialsDir :path.join(app.get('views') , 'partials'), 
-    extname: '.hbs',
-       
+    extname: '.hbs',     
 })); 
 
 app.set('view engine' , 'hbs'); //se define el engine de vistas utilizado *(lineas anteriores)
@@ -34,12 +35,17 @@ app.use(session({
     resave: true, 
     saveUninitialized : true 
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
-//Global Variables  
+//Global Variables      
 app.use((req, res , next)=>{
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 })
 
@@ -64,16 +70,5 @@ app.listen(app.get('port'),()=>{
 
 
 ///PRUEBA CON EVENTOS 
-const emiter = new Event();
-
-emiter.on('error', (ar) =>{
-    if(ar){
-    console.log('te equivocaste' , ar)
-    }else{
-        console.error('no tiene errores')
-    }
-})
-
-emiter.emit('error', {id : 1 , nombre: 'rodrigo'});
 
 

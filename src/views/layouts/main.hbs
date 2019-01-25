@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <p>wena cabros</p>
-    <main class="container">
+    {{> navigations }}
+    <main class="container p-4">
         {{> msg }}
+        {{> errors}}
         {{{body}}}
     </main>
     <p>este el footer</p>
